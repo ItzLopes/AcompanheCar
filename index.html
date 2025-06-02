@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcompanheCar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --cor-azul-marinho: #003366;
+            --cor-grafite: #333333;
+            --cor-azul-medio: #0066CC;
+            --cor-laranja-cta: #FF6600;
+            --cor-branco: #FFFFFF;
+            --cor-cinza-claro: #F8F8F8;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--cor-branco);
+            color: var(--cor-grafite);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--cor-azul-marinho);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--cor-laranja-cta);
+            color: var(--cor-branco);
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #E65C00;
+        }
+
+        .hero {
+            background-color: var(--cor-azul-marinho);
+            color: var(--cor-branco);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.05) 100%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            color: var(--cor-branco);
+            font-size: 3em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: var(--cor-cinza-claro);
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .hero-image {
+            margin-top: 40px;
+            max-width: 70%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .problema-solucao {
+            padding: 60px 0;
+            background-color: var(--cor-cinza-claro);
+        }
+
+        .problema-solucao h2 {
+            font-size: 2.2em;
+        }
+
+        .problema-solucao .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .problema-solucao .col {
+            background-color: var(--cor-branco);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .problema-solucao .col h3 {
+            font-size: 1.6em;
+            color: var(--cor-azul-marinho);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .problema-solucao .col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .problema-solucao .col ul li {
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .problema-solucao .col ul li .icon {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 1.2em;
+        }
+
+        .problema-solucao .col.problemas li .icon {
+            color: #FF4500;
+        }
+
+        .problema-solucao .col.solucoes li .icon {
+            color: var(--cor-azul-medio);
+        }
+
+        .funcionalidades {
+            padding: 60px 0;
+        }
+
+        .funcionalidades h2 {
+            font-size: 2.2em;
+        }
+
+        .funcionalidades .grid-funcionalidades {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .funcionalidades .feature-item {
+            text-align: center;
+            background-color: var(--cor-branco);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .funcionalidades .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .funcionalidades .feature-item .icon-wrapper {
+            background-color: var(--cor-azul-medio);
+            color: var(--cor-branco);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2em;
+            margin: 0 auto 20px auto;
+        }
+
+        .funcionalidades .feature-item h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: var(--cor-azul-marinho);
+        }
+
+        .funcionalidades .feature-item p {
+            font-size: 1em;
+            color: var(--cor-grafite);
+            text-align: center;
+        }
+
+        .depoimentos {
+            background-color: var(--cor-azul-marinho);
+            color: var(--cor-branco);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .depoimentos h2 {
+            color: var(--cor-branco);
+            font-size: 2.2em;
+        }
+
+        .depoimentos .carousel-container {
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .depoimentos .depoimento-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+        }
+
+        .depoimentos .depoimento-item {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 220px;
+        }
+
+        .depoimentos .depoimento-item blockquote {
+            font-style: italic;
+            margin: 0 auto 20px auto;
+            font-size: 1.1em;
+            color: var(--cor-cinza-claro);
+            max-width: 90%;
+            line-height: 1.8;
+        }
+
+        .depoimentos .depoimento-item .author {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: var(--cor-branco);
+        }
+
+        .depoimentos .depoimento-item .author span {
+            display: block;
+            font-size: 0.9em;
+            color: var(--cor-cinza-claro);
+            font-weight: normal;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: var(--cor-branco);
+            border: none;
+            padding: 15px 10px;
+            cursor: pointer;
+            font-size: 2em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+
+        .planos {
+            padding: 60px 0;
+            background-color: var(--cor-cinza-claro);
+            text-align: center;
+        }
+
+        .planos h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .planos .plan-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .planos .plan-card {
+            background-color: var(--cor-branco);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .planos .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .planos .plan-card.featured {
+            background-color: var(--cor-azul-marinho);
+            color: var(--cor-branco);
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .planos .plan-card.featured .plan-header h3,
+        .planos .plan-card.featured .plan-price span,
+        .planos .plan-card.featured .plan-price small,
+        .planos .plan-card.featured .plan-features li {
+            color: var(--cor-branco);
+        }
+
+        .planos .plan-card.featured .plan-features li .icon {
+            color: var(--cor-laranja-cta);
+        }
+
+        .planos .plan-card .plan-header h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: var(--cor-azul-marinho);
+        }
+
+        .planos .plan-card .plan-price {
+            margin: 20px 0;
+        }
+
+        .planos .plan-card .plan-price span {
+            font-size: 3em;
+            font-weight: bold;
+            color: var(--cor-azul-medio);
+            display: block;
+        }
+
+        .planos .plan-card .plan-price small {
+            font-size: 1em;
+            color: var(--cor-grafite);
+            display: block;
+        }
+
+        .planos .plan-card .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 30px 0;
+            flex-grow: 1;
+        }
+
+        .planos .plan-card .plan-features li {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: var(--cor-grafite);
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .planos .plan-card .plan-features li .icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+            color: var(--cor-azul-medio);
+        }
+
+        .planos .plan-card .btn-plan {
+            width: 100%;
+            padding: 15px 0;
+            font-size: 1.1em;
+            margin-top: auto;
+        }
+
+        .cta-final {
+            padding: 60px 0;
+            text-align: center;
+            background-color: var(--cor-cinza-claro);
+        }
+
+        .cta-final h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .cta-final p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            color: var(--cor-grafite);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #formulario-contato {
+            margin-top: 60px;
+            background-color: var(--cor-branco);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #formulario-contato h3 {
+            color: var(--cor-azul-marinho);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #formulario-contato input[type="text"],
+        #formulario-contato input[type="email"],
+        #formulario-contato input[type="tel"],
+        #formulario-contato textarea {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-bottom: 20px;
+        }
+
+        #formulario-contato textarea {
+            resize: vertical;
+        }
+
+        #formulario-contato .btn {
+            width: 100%;
+        }
+
+
+        .faq {
+            padding: 60px 0;
+            background-color: var(--cor-branco);
+        }
+
+        .faq h2 {
+            font-size: 2.2em;
+        }
+
+        .faq .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .faq .faq-item h3 {
+            font-size: 1.3em;
+            color: var(--cor-azul-marinho);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq .faq-item h3 i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq .faq-item p {
+            display: none;
+            text-align: left;
+            margin-top: 10px;
+            padding-left: 15px;
+            color: var(--cor-grafite);
+        }
+
+        .faq .faq-item.active p {
+            display: block;
+        }
+
+        .faq .faq-item.active h3 i {
+            transform: rotate(180deg);
+        }
+
+
+        footer {
+            background-color: var(--cor-grafite);
+            color: var(--cor-branco);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer .social-icons a {
+            color: var(--cor-branco);
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: var(--cor-azul-medio);
+        }
+
+        footer p {
+            margin-top: 20px;
+            color: var(--cor-cinza-claro);
+        }
+
+        footer a {
+            color: var(--cor-azul-medio);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--cor-laranja-cta);
+        }
+
+        .negrito {
+            font-weight: bold;
+        }
+
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .hero .hero-image {
+                max-width: 90%;
+            }
+
+            .problema-solucao .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .funcionalidades .grid-funcionalidades {
+                grid-template-columns: 1fr;
+            }
+
+            .depoimentos .carousel-container {
+                max-width: 95%;
+            }
+            .depoimentos .depoimento-item {
+                padding: 30px 15px;
+            }
+            .depoimentos .depoimento-item blockquote {
+                 max-width: 95%;
+            }
+            .carousel-btn {
+                padding: 10px 8px;
+                font-size: 1.5em;
+            }
+
+            .planos .plan-cards-container {
+                grid-template-columns: 1fr;
+            }
+            .planos .plan-card.featured {
+                transform: scale(1.02);
+            }
+
+            .cta-final h2 {
+                font-size: 2em;
+            }
+
+            .cta-final p {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .problema-solucao .col {
+                padding: 20px;
+            }
+
+            .funcionalidades .feature-item {
+                padding: 20px;
+            }
+            
+            #formulario-contato input[type="text"],
+            #formulario-contato input[type="email"],
+            #formulario-contato input[type="tel"],
+            #formulario-contato textarea {
+                width: calc(100% - 24px);
+                padding: 10px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Chega de caos na sua oficina!</h1>
+            <p>Conheça o sistema que vai revolucionar sua gestão e otimizar seus lucros.</p>
+            <a href="#planos" class="btn">7 Dias Grátis!</a>
+        </div>
+    </section>
+
+    <section class="problema-solucao">
+        <div class="container">
+            <h2>Transforme os desafios da sua oficina em oportunidades!</h2>
+            <div class="grid-container">
+                <div class="col problemas">
+                    <h3>Você se identifica com esses problemas?</h3>
+                    <ul>
+                        <li><i class="fas fa-times-circle icon"></i> Perda de tempo com papelada e planilhas?</li>
+                        <li><i class="fas fa-times-circle icon"></i> Dificuldade em controlar o estoque de peças?</li>
+                        <li><i class="fas fa-times-circle icon"></i> Falta de visibilidade sobre suas finanças e lucros?</li>
+                        <li><i class="fas fa-times-circle icon"></i> Caos no agendamento e nas ordens de serviço?</li>
+                        <li><i class="fas fa-times-circle icon"></i> Clientes esquecidos e sem histórico de manutenção?</li>
+                    </ul>
+                </div>
+                <div class="col solucoes">
+                    <h3>Nossa solução para sua oficina:</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Produtividade aumentada:</span> Automatize processos e ganhe tempo.</li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Controle total de estoque:</span> Peças certas, no lugar certo, sempre.</li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Finanças descomplicadas:</span> Saiba onde seu dinheiro está indo e vindo.</li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Gestão de ordens de serviço simplificada:</span> Organização impecável do atendimento ao pós-venda.</li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Relacionamento com o cliente:</span> Histórico completo para um serviço personalizado.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="funcionalidades">
+        <div class="container">
+            <h2>Funcionalidades essenciais para o sucesso da sua oficina</h2>
+            <div class="grid-funcionalidades">
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Ordens de serviço integradas</h3>
+                    <p>Crie, edite e acompanhe todas as OS com facilidade. Adicione peças, serviços, e anexe arquivos. Tenha visibilidade em tempo real.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-warehouse"></i></div>
+                    <h3>Controle de estoque inteligente</h3>
+                    <p>Gerencie peças, produtos e insumos com precisão. Receba alertas de estoque mínimo e otimize suas compras.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
+                    <h3>Módulo financeiro completo</h3>
+                    <p>Controle contas a pagar e receber, fluxo de caixa, emita recibos e tenha relatórios financeiros claros para decisões estratégicas.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-users"></i></div>
+                    <h3>Gestão de clientes e veículos</h3>
+                    <p>Mantenha um cadastro completo de clientes, veículos e histórico de serviços. Fortaleça o relacionamento e personalize o atendimento.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-calendar-alt"></i></div>
+                    <h3>Agendamento otimizado</h3>
+                    <p>Organize sua agenda de serviços e técnicos. Evite conflitos de horário e maximize a capacidade da sua oficina.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Emissão de notas e relatórios</h3>
+                    <p>Gere notas fiscais e relatórios gerenciais detalhados para acompanhar o desempenho, lucratividade e identificar oportunidades de melhoria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="depoimentos">
+        <div class="container">
+            <h2>O que nossos clientes dizem</h2>
+            <div class="carousel-container"> <div class="depoimento-carousel">
+                    <div class="depoimento-item">
+                        <blockquote>"Desde que implementamos o AcompanheCar, nossa produtividade dobrou! O controle de estoque é impecável e as finanças nunca estiveram tão claras."</blockquote>
+                        <p class="author">Maria Lúcia<br><span>Mecânica Essencial - Campo Grande, MS</span></p>
+                    </div>
+                    <div class="depoimento-item">
+                        <blockquote>"A simplicidade de uso do sistema é incrível. Meus funcionários se adaptaram rapidamente e agora temos total controle sobre as ordens de serviço. Recomendo!"</blockquote>
+                        <p class="author">Roberto Carlos<br><span>Auto Elétrica do Roberto - Cuiabá, MT</span></p>
+                    </div>
+                    <div class="depoimento-item">
+                        <blockquote>"Finalmente encontrei um sistema que entende as necessidades de uma oficina. Os relatórios financeiros são um diferencial, me ajudam a tomar decisões mais assertivas."</blockquote>
+                        <p class="author">Fernanda Torres<br><span>Funilaria e Pintura Rápida - São Paulo, SP</span></p>
+                    </div>
+                     <div class="depoimento-item">
+                        <blockquote>"Nosso fluxo de caixa melhorou drasticamente com a organização financeira do sistema. É uma ferramenta indispensável para qualquer oficina moderna!"</blockquote>
+                        <p class="author">Carlos Eduardo<br><span>Oficina Master Car - Curitiba, PR</span></p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <section class="planos" id="planos">
+        <div class="container">
+            <h2>Escolha o plano ideal para a sua oficina</h2>
+            <div class="plan-cards-container">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Plano Essencial</h3>
+                    </div>
+                    <div class="plan-price">
+                        <span>R$ 149,90</span>
+                        <small>por mês</small>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check-circle icon"></i> Gestão de ordens de serviço (até 50/mês)</li>
+                        <li><i class="fas fa-check-circle icon"></i> Cadastro de clientes e veículos</li>
+                        <li><i class="fas fa-check-circle icon"></i> Controle básico de estoque</li>
+                        <li><i class="fas fa-check-circle icon"></i> Relatórios essenciais</li>
+                        <li><i class="fas fa-times-circle icon" style="color: #FF4500;"></i> Módulo financeiro completo</li>
+                        <li><i class="fas fa-times-circle icon" style="color: #FF4500;"></i> Agendamento otimizado</li>
+                    </ul>
+                    <a href="#" class="btn btn-plan">7 Dias Grátis!</a>
+                </div>
+
+                <div class="plan-card featured">
+                    <div class="plan-header">
+                        <h3>Plano Completo</h3>
+                    </div>
+                    <div class="plan-price">
+                        <span>R$ 299,90</span>
+                        <small>por mês</small>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check-circle icon"></i> Ordens de serviço ILIMITADAS</li>
+                        <li><i class="fas fa-check-circle icon"></i> Cadastro de clientes e veículos</li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Controle de estoque inteligente</span></li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Módulo financeiro completo</span></li>
+                        <li><i class="fas fa-check-circle icon"></i> <span class="negrito">Agendamento otimizado</span></li>
+                        <li><i class="fas fa-check-circle icon"></i> Suporte prioritário</li>
+                    </ul>
+                    <a href="#" class="btn btn-plan"><span class="negrito">7 Dias Grátis!</span></a>
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>Plano Premium</h3>
+                    </div>
+                    <div class="plan-price">
+                        <span>R$ 499,90</span>
+                        <small>por mês</small>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check-circle icon"></i> Todas as funcionalidades do Plano Completo</li>
+                        <li><i class="fas fa-check-circle icon"></i> Integração com NFe (opcional)</li>
+                        <li><i class="fas fa-check-circle icon"></i> Módulo de lembretes automáticos (SMS/WhatsApp)</li>
+                        <li><i class="fas fa-check-circle icon"></i> Acesso para múltiplos usuários</li>
+                        <li><i class="fas fa-check-circle icon"></i> Consultoria de implementação personalizada</li>
+                        <li><i class="fas fa-check-circle icon"></i> Dashboard gerencial avançado</li>
+                    </ul>
+                    <a href="#contato" class="btn btn-plan">Fale com um consultor</a>
+                </div>
+            </div>
+            <p style="margin-top: 40px; font-size: 1.1em; color: var(--cor-grafite);">Precisa de algo sob medida? <a href="#contato" style="color: var(--cor-azul-medio); text-decoration: none; font-weight: bold;">Entre em contato</a> para um plano personalizado!</p>
+        </div>
+    </section>
+
+    <section class="cta-final" id="contato">
+        <div class="container">
+            <h2>Não deixe o caos dominar sua oficina!</h2>
+            <p>Está na hora de modernizar, otimizar e levar sua oficina para o próximo nível. Preencha o formulário e descubra como nosso sistema pode transformar seu negócio.</p>
+            <a href="#planos" class="btn">7 Dias Grátis!</a>
+
+            <div id="formulario-contato">
+                <h3>Fale com um especialista</h3>
+                <form action="#" method="POST">
+                    <div>
+                        <input type="text" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+                    <div>
+                        <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+                    </div>
+                    <div>
+                        <input type="tel" name="telefone" placeholder="Telefone (com DDD)" required>
+                    </div>
+                    <div>
+                        <input type="text" name="oficina" placeholder="Nome da sua oficina" required>
+                    </div>
+                    <div>
+                        <textarea name="mensagem" placeholder="Sua mensagem (opcional)" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Solicitação</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <h3>O sistema é fácil de usar? <i class="fas fa-chevron-down"></i></h3>
+                <p>Sim! Nosso sistema foi desenvolvido com uma interface intuitiva e amigável. Oferecemos treinamento e suporte para garantir que você e sua equipe se adaptem rapidamente.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Preciso instalar algum programa no meu computador? <i class="fas fa-chevron-down"></i></h3>
+                <p>Não! Nosso sistema é totalmente online (baseado na nuvem). Você acessa de qualquer lugar, a qualquer hora, com um navegador de internet. Sem instalações complicadas ou preocupações com backup.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Vocês oferecem suporte técnico? <i class="fas fa-chevron-down"></i></h3>
+                <p>Com certeza! Oferecemos suporte técnico especializado via telefone, e-mail e chat para tirar todas as suas dúvidas e ajudar no que for preciso.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>Contato: (67) 99999-9999 | contato@acompanhecar.com.br</p>
+            <p>&copy; 2025 AcompanheCar. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.closest('.faq-item');
+                item.classList.toggle('active');
+            });
+        });
+
+        const carousel = document.querySelector('.depoimento-carousel');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const depoimentoItems = document.querySelectorAll('.depoimento-item');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            if (depoimentoItems.length === 0) return;
+
+            const itemWidth = depoimentoItems[0].offsetWidth; 
+
+            const offset = -currentIndex * itemWidth;
+            carousel.style.transform = `translateX(${offset}px)`;
+
+            prevBtn.disabled = (currentIndex === 0);
+            nextBtn.disabled = (currentIndex >= depoimentoItems.length - 1);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < depoimentoItems.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        });
+
+        window.addEventListener('load', updateCarousel);
+        window.addEventListener('resize', updateCarousel);
+    </script>
+
+</body>
+</html>
